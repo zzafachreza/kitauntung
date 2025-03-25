@@ -74,6 +74,9 @@ import {
   LapakUMKM,
   UMKMDetail,
   UMKMCheckout,
+  UMKMOrder,
+  Galeri,
+  GaleriDetail,
 
 
 
@@ -101,7 +104,7 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName='UMKMDetial'>
+    <Stack.Navigator initialRouteName='GaleriDetail'>
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -179,6 +182,36 @@ export default function Router() {
 
         }}
       />
+
+
+<Stack.Screen
+        name="UMKMOrder"
+        component={UMKMOrder}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+
+<Stack.Screen
+        name="Galeri"
+        component={Galeri}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+<Stack.Screen
+        name="GaleriDetail"
+        component={GaleriDetail}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
 
 <Stack.Screen
         name="Login"

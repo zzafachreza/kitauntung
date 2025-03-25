@@ -19,6 +19,9 @@ import PembangunanDetail from './Menu/pembangunandetail';
 import LapakUMKM from './Menu/umkm';
 import UMKMDetail from './Menu/umkmdetail';
 import UMKMCheckout from './Menu/umkmcheck';
+import UMKMOrder from './Menu/umkmorder';
+import Galeri from './Menu/galeri';
+import GaleriDetail from './Menu/galeridetail';
 
 
 
@@ -44,7 +47,9 @@ export {
   LapakUMKM,
   UMKMDetail,
   UMKMCheckout,
-
+  UMKMOrder,
+  Galeri,
+  GaleriDetail,
 
   
 
