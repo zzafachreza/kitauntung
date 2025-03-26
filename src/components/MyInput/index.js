@@ -39,10 +39,11 @@ export default function MyInput({
         fontFamily:fonts.primary[600],
         color: colorlabel,
         marginBottom: 8,
-        marginLeft:10
+        marginLeft:10,
+        marginTop:20
       }}>{label}</Text>
       <View style={{
-        height: 40,
+        height: 50,
         flexDirection: 'row', // Gunakan row agar TextInput dan label bisa sejajar
         alignItems: 'center', // Align center agar teks sejajar vertikal
         borderWidth: 1,

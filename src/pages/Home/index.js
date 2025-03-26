@@ -100,7 +100,7 @@ export default function Home({ navigation, route }) {
               }}>
 
 
-              <TouchableNativeFeedback>
+              <TouchableNativeFeedback onPress={() => navigation.navigate('Penduduk')}>
                 <View style={{
                   padding:10,
                   borderRadius:20,
@@ -127,7 +127,7 @@ export default function Home({ navigation, route }) {
                 </View>
               </TouchableNativeFeedback>
 
-              <TouchableNativeFeedback>
+              <TouchableNativeFeedback onPress={() => navigation.navigate('Pembangunan')}>
                 <View style={{
                   padding:10,
                   borderRadius:20,
@@ -169,7 +169,7 @@ export default function Home({ navigation, route }) {
               }}>
 
 
-              <TouchableNativeFeedback>
+              <TouchableNativeFeedback onPress={() => navigation.navigate('LapakUMKM')}>
                 <View style={{
                   padding:10,
                   borderRadius:20,
@@ -196,7 +196,7 @@ export default function Home({ navigation, route }) {
                 </View>
               </TouchableNativeFeedback>
 
-              <TouchableNativeFeedback>
+              <TouchableNativeFeedback onPress={() => navigation.navigate('Galeri')}>
                 <View style={{
                   padding:10,
                   borderRadius:20,

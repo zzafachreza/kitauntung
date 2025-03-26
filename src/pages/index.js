@@ -22,6 +22,11 @@ import UMKMCheckout from './Menu/umkmcheck';
 import UMKMOrder from './Menu/umkmorder';
 import Galeri from './Menu/galeri';
 import GaleriDetail from './Menu/galeridetail';
+import PermohonanSuratKeterangan from './Menu/SuratKeterangan';
+import TambahPermohonan from './Menu/TambahPermohonan';
+
+
+
 
 
 
@@ -50,6 +55,9 @@ export {
   UMKMOrder,
   Galeri,
   GaleriDetail,
+  PermohonanSuratKeterangan,
+  TambahPermohonan,
+  
 
   
 

@@ -85,6 +85,8 @@ import { colors } from '../utils';
 import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
+import PermohonanSuratKeterangan from '../pages/Menu/SuratKeterangan';
+import TambahPermohonan from '../pages/Menu/TambahPermohonan';
 
 
 
@@ -104,7 +106,7 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName='GaleriDetail'>
+    <Stack.Navigator initialRouteName='TambahPermohonanSuratKeterangan'>
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -206,6 +208,26 @@ export default function Router() {
 <Stack.Screen
         name="GaleriDetail"
         component={GaleriDetail}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+<Stack.Screen
+        name="PermohonanSuratKeterangan"
+        component={PermohonanSuratKeterangan}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+
+      
+<Stack.Screen
+        name="TambahPermohonanSuratKeterangan"
+        component={TambahPermohonan}
         options={{
           headerShown: false,
 

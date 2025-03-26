@@ -4,31 +4,35 @@ import { colors } from '../../utils';
 import { MyHeader } from '../../components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-// Sample data array for gallery items
 const galleryData = [
   {
     id: 1,
     title: 'Kegiatan Musrembang 2025',
     image: require('../../assets/img_dummy2.png'),
-    screen: 'PembangunanDetail'
+    previewImages: [
+      require('../../assets/img_dummy2.png'),
+      require('../../assets/img_dummy2.png'),
+      require('../../assets/img_dummy2.png')
+    ]
   },
-  
+  // Add more gallery items as needed
 ];
 
 export default function Galeri({ navigation }) {
   return (
-    <View style={{
-      flex: 1,
-      backgroundColor: colors.white
-    }}>
+    <View style={{ flex: 1, backgroundColor: colors.white }}>
       <MyHeader title="Galeri" />
       <ScrollView>
-        <View style={{
-          padding: 10
-        }}>
-          {/* Map through galleryData array */}
+        <View style={{ padding: 10 }}>
           {galleryData.map((item) => (
-            <TouchableWithoutFeedback key={item.id}>
+            <TouchableWithoutFeedback 
+              key={item.id}
+              onPress={() => navigation.navigate('GaleriDetail', {
+                title: item.title,
+                mainImage: item.image,
+                previewImages: item.previewImages
+              })}
+            >
               <ImageBackground
                 source={item.image}
                 style={{
@@ -55,8 +59,11 @@ export default function Galeri({ navigation }) {
                   }}>
                     {item.title}
                   </Text>
-
-                  <TouchableOpacity onPress={() => navigation.navigate(item.screen)}>
+                  <TouchableOpacity onPress={() => navigation.navigate('GaleriDetail', {
+                    title: item.title,
+                    mainImage: item.image,
+                    previewImages: item.previewImages
+                  })}>
                     <Text style={{
                       fontSize: 12,
                       fontFamily: 'Poppins-SemiBold',
@@ -70,7 +77,6 @@ export default function Galeri({ navigation }) {
               </ImageBackground>
             </TouchableWithoutFeedback>
           ))}
-
         </View>
       </ScrollView>
     </View>

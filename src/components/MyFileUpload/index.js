@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
   label: {
     ...fonts.subheadline3,
     color: colors.primary,
-    marginBottom: 8,
+    marginBottom: 0,
   },
   button: {
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 30,
     backgroundColor: 'white',
     paddingLeft: 12,
   },

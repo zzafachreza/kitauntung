@@ -21,8 +21,9 @@ export const fonts = {
 
   headline2: {
     fontFamily: 'Montserrat-Bold',
-    fontSize: 22,
-    lineHeight: 41
+    fontSize: 18,
+    lineHeight: 20,
+  
   },
 
 

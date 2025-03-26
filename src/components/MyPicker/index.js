@@ -32,7 +32,7 @@ export default function MyPicker({
       <Text
         style={{
           fontFamily: fonts.primary[600],
-          color: colors.primary,
+          color: colors.black,
           marginBottom: 8,
           marginTop: 10,
           marginLeft: 10,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 8,
     fontSize: 14,
     fontFamily: fonts.primary[500],
-    color: colors.primary,
+    color: colors.black,
     textAlign: 'left',  // Teks diatur agar di kiri
     flexShrink: 1,      // Agar teks bisa disesuaikan dengan ruang yang ada
     flexWrap: 'wrap',   // Agar teks panjang bisa dibungkus ke baris berikutnya

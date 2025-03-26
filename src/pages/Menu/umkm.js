@@ -84,7 +84,7 @@ export default function LapakUMKM({ navigation }) {
                   justifyContent: "flex-end",
                   alignItems: "center"
                 }}>
-                  <TouchableNativeFeedback onPress={() => navigation.navigate('DetailLapak', { id: item.id })}>
+                  <TouchableNativeFeedback onPress={() => navigation.navigate('UMKMDetial', { id: item.id })}>
                     <View style={{
                       padding: 10,
                       backgroundColor: colors.primary,
