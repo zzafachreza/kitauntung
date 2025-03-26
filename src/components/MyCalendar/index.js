@@ -55,7 +55,7 @@ export default function MyCalendar({
           left: 12,
           top: 13,
         }}>
-          <Icon type='ionicon' name='calendar' color={colors.primary} size={24} />
+          <Icon type='ionicon' name='calendar' color={colors.black} size={24} />
         </View>
         <Text style={{
           position: 'absolute',

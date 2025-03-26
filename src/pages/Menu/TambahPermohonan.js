@@ -4,7 +4,7 @@ import { colors, fonts } from '../../utils'
 import { MyFileUploader, MyHeader, MyInput, MyPicker } from '../../components'
 import LinearGradient from 'react-native-linear-gradient'
 
-export default function TambahPermohonan() {
+export default function TambahPermohonan({navigation}) {
   return (
     <View style={{
         flex:1,
@@ -19,7 +19,11 @@ export default function TambahPermohonan() {
             }}> 
 
 
-                <MyPicker  label="Jenis Surat yang Dimohon"/>
+                <MyPicker data={[
+                    {label:"Surat Keterangan Tidak Mampu", value: "SKTM"},
+                    {label:"Biodata Penduduk", value: "Biodata Penduduk"},
+                    {label:"Keterangan Domisili Tidak Mampu", value: "Keterangan Domisili"},
+                ]}  label="Jenis Surat yang Dimohon"/>
                 <MyInput label="Keterangan Tambahan"/>
                 <MyInput label="No HP Aktif" />
 
@@ -33,7 +37,7 @@ export default function TambahPermohonan() {
                     <MyFileUploader/>
                 </View>
 
-                    <TouchableNativeFeedback >
+                    <TouchableNativeFeedback onPress={() => navigation.navigate('STKMPage')}>
                     <LinearGradient
                         colors={['#DFA92B', '#B77B25']} // Warna gradien dari file Anda
                         start={{ x: 0, y: 0 }} // Titik awal gradien

@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { colors, fonts } from '../../utils';
 import { Icon } from 'react-native-elements';
 
-export default function PermohonanSuratKeterangan() {
+export default function PermohonanSuratKeterangan({navigation}) {
   return (
     <View style={styles.container}>
       <MyHeader title={`Permohonan Surat Keterangan`}/>
@@ -51,7 +51,7 @@ export default function PermohonanSuratKeterangan() {
 
       }}>
 
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate('TambahPermohonanSuratKeterangan')}>
            <LinearGradient
                 colors={['#DFA92B', '#B77B25']} // Warna gradien dari file Anda
                 start={{ x: 0, y: 0 }} // Titik awal gradien

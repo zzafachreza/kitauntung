@@ -235,7 +235,7 @@ export default function Home({ navigation, route }) {
               }}>
 
 
-              <TouchableNativeFeedback>
+              <TouchableNativeFeedback onPress={() => navigation.navigate('PermohonanSuratKeterangan')}>
                 <View style={{
                   padding:10,
                   borderRadius:20,

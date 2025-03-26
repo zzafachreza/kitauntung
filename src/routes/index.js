@@ -77,6 +77,7 @@ import {
   UMKMOrder,
   Galeri,
   GaleriDetail,
+  SKTMPage,
 
 
 
@@ -106,7 +107,7 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName='TambahPermohonanSuratKeterangan'>
+    <Stack.Navigator initialRouteName='MainApp'>
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -233,6 +234,17 @@ export default function Router() {
 
         }}
       />
+
+
+<Stack.Screen
+        name="STKMPage"
+        component={SKTMPage}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
 
 
 <Stack.Screen
