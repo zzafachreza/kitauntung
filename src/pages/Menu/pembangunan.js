@@ -44,6 +44,21 @@ export default function Pembangunan({ navigation }) {
                   Safari Ramadhan di Tanjung Buntung dan Sadai, Rudi Paparkan Rencana...
                 </Text>
 
+                <View style={{
+                  flexDirection:"row",
+                  justifyContent:"space-between",
+                  alignItems:"center",
+                }}>
+
+                {/* TANGGAL */}
+
+                <Text style={{
+                  fontSize:12,
+                  color:colors.white,
+                  fontFamily:'Poppins-Regular',
+                }}>9 April 2025</Text>
+                  
+                {/* SELENGKAPNYA */}
                 <TouchableOpacity onPress={() => navigation.navigate('PembangunanDetail')}>
                   <Text style={{
                     fontSize: 12, // Ukuran font lebih kecil
@@ -54,6 +69,7 @@ export default function Pembangunan({ navigation }) {
                     Selengkapnya
                   </Text>
                 </TouchableOpacity>
+                </View>
               </View>
             </ImageBackground>
           </TouchableWithoutFeedback>

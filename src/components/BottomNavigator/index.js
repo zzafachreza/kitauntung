@@ -13,6 +13,7 @@ import { getData, urlAPI } from '../../utils/localStorage';
 import axios from 'axios';
 import { useIsFocused } from '@react-navigation/native';
 import { fonts } from '../../utils';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function BottomNavigator({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -37,9 +38,12 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
   }
 
   return (
-    <View
+    <LinearGradient
+           colors={['#DFA92B', '#B77B25']} // Warna gradien dari file Anda
+            start={{ x: 0, y: 0 }} // Titik awal gradien
+            end={{ x: 0, y: 1 }} // Titik akhir gradien
       style={{
-        backgroundColor: colors.primary,
+       
         flexDirection: 'row',
         borderTopWidth: 1,
         borderTopColor: Color.blueGray[100],
@@ -113,14 +117,14 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
                 type="ionicon"
                 name={iconName}
                 size={35}
-                color={isFocused ? colors.white : colors.secondary}
+                color={isFocused ? colors.white : colors.white}
               />
              
             </View>
           </TouchableOpacity>
         );
       })}
-    </View>
+    </LinearGradient>
   );
 }
 

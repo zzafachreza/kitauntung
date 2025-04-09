@@ -72,7 +72,8 @@ export default function UMKMCheckout({ route, navigation }) {
                   justifyContent:"center",
                   padding:0,
                   margin:0,
-                  includeFontPadding:false
+                  includeFontPadding:false,
+                  color:colors.black
                 }}
                 value={quantity.toString()}
                 editable={false}

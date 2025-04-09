@@ -78,6 +78,7 @@ import {
   Galeri,
   GaleriDetail,
   SKTMPage,
+  OutputSKTM,
 
 
 
@@ -107,7 +108,7 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName='MainApp'>
+    <Stack.Navigator initialRouteName=''>
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -237,8 +238,17 @@ export default function Router() {
 
 
 <Stack.Screen
-        name="STKMPage"
+        name="SKTMPage"
         component={SKTMPage}
+        options={{
+          headerShown: false,
+
+        }}
+      />
+
+<Stack.Screen
+        name="OuputSKTM"
+        component={OutputSKTM}
         options={{
           headerShown: false,
 

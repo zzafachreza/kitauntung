@@ -8,6 +8,7 @@ import {
     Linking,
     Alert,
     ActivityIndicator,
+    TouchableNativeFeedback,
 } from 'react-native';
 import { windowWidth, fonts, MyDimensi } from '../../utils/fonts';
 import { getData, MYAPP, storeData, urlAPI, urlApp, urlAvatar } from '../../utils/localStorage';
@@ -17,10 +18,10 @@ import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
-import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import { ScrollView } from 'react-native';
 import { Collator } from 'intl';
+import LinearGradient from 'react-native-linear-gradient';  
 
 export default function ({ navigation, route }) {
     const [user, setUser] = useState({});
@@ -115,7 +116,7 @@ export default function ({ navigation, route }) {
         }}>
 
 
-            <MyHeader title="Akun Saya" onPress={() => navigation.goBack()} />
+            <MyHeader title="Profil" onPress={() => navigation.goBack()} />
             {!open && <View style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -137,39 +138,22 @@ export default function ({ navigation, route }) {
                             
                         </View>
                         <View style={{ padding: 10, }}>
-                            <MyList label="Nama Lengkap :" value={'Angga Kurniawan'} />
-                            <MyList label="Email :" value={'anggakurniawan12@gmail.com'} />
-                            <MyList label="Telepon :" value={'0865665467467'} />
-                            <MyList label="Alamat Lengkap :" value={'Depok, Jawa Barat'} />
-                            <View style={{
-                                padding:10,
-                                marginTop:10,
-
-                            }}>
-
-                            <Text style={{
-                                fontFamily  :fonts.primary[600],
-                                color:colors.primary
-                            }}>
-                            Foto Tanda Tangan : 
-                            </Text>
-
-                            <View style={{
-                                padding:10,
-                                marginTop:10,
-                                backgroundColor:Color.blueGray[50],
-                                borderRadius:30
-                            }}>
-
-                            <Image style={{
-                                width:127,
-                                height:120,
-                                alignSelf:'center'
-                            }} source={require('../../assets/ttd_dummmy.png')}/>
-
-                            </View>
-
-                            </View>
+                            <MyList value={'3236273457326889'} />
+                            <MyList value={'Nizam Syahputra'} />
+                            <MyList value={'nizamsyah12'} />
+                            <MyList value={'Bandung, 12 Maret 1996'} />
+                            <MyList value={'Jl. Banda No. 30'} />
+                            <MyList value={'001'} />
+                            <MyList value={'003'} />
+                            <MyList value={'Citarum'} />
+                            <MyList value={'Bandung Wetan'} />
+                            <MyList value={'Strata 1'} />
+                            <MyList value={'Pegawai Swasta'} />
+                            <MyList value={'Indonesia'} />
+                            <MyList value={'089765656873'} />
+                            <MyList value={'Islam'} />
+                           
+                          
                            
                         </View>
                         {/* data detail */}
@@ -179,7 +163,26 @@ export default function ({ navigation, route }) {
                 <View style={{
                     padding: 20,
                 }}>
-                    <MyButton warna={colors.primary} title="Edit Profile"  onPress={() => navigation.navigate('AccountEdit', user)} />
+                         <TouchableNativeFeedback  onPress={() => navigation.navigate('AccountEdit', user)}>
+                    <LinearGradient
+                        colors={['#DFA92B', '#B77B25']} // Warna gradien dari file Anda
+                        start={{ x: 0, y: 0 }} // Titik awal gradien
+                        end={{ x: 0, y: 1 }} // Titik akhir gradien
+                        style={{
+                            padding: 15,
+                            borderRadius: 50,
+                            alignItems: 'center',
+                            marginTop: -10,
+                            height:50
+                        }}
+                    >
+                        <Text style={{
+                            fontFamily: fonts.primary[600],
+                            color: colors.white,
+                            fontSize: 16,
+                        }}>Edit Profile</Text>
+                    </LinearGradient>
+                </TouchableNativeFeedback>
                     <MyGap jarak={10} />
                     <MyButton onPress={btnKeluar} warna={Color.blueGray[400]} title="Log Out"  iconColor={colors.white} colorText={colors.white} />
                 </View>

@@ -8,25 +8,30 @@ import { fonts } from '../../utils/fonts';
 export default function MyFileUploader({
   label,
   iconname = 'upload',
-  onFileChange,
+  onUpload, // Changed from onFileChange to onUpload to match parent
   borderColor = Color.blueGray[300],
+  value, // Add value prop to handle external state
 }) {
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState(value?.name || '');
 
   const pickFile = async () => {
     try {
       const result = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
-      if (result) {
-        // Update nama file yang dipilih
-        setFileName(result[0].name);
-
-        // Pastikan onFileChange adalah fungsi sebelum memanggilnya
-        if (typeof onFileChange === 'function') {
-          onFileChange(result[0]);
-        } else {
-          console.warn('onFileChange prop is not a function');
+      
+      if (result && result[0]) {
+        const file = {
+          name: result[0].name,
+          uri: result[0].uri,
+          type: result[0].type,
+          size: result[0].size
+        };
+        
+        setFileName(file.name);
+        
+        if (typeof onUpload === 'function') {
+          onUpload(file); // Send complete file object
         }
       }
     } catch (error) {
@@ -40,11 +45,10 @@ export default function MyFileUploader({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <TouchableOpacity onPress={pickFile} style={[styles.button, { borderColor: borderColor }]}>
-        
-        <Text style={styles.fileNameText}>
-          {fileName ? fileName : 'Pilih File'}
+      <TouchableOpacity onPress={pickFile} style={[styles.button, { borderColor }]}>
+  
+        <Text style={styles.fileNameText} numberOfLines={1} ellipsizeMode="middle">
+          {fileName || 'Pilih File'}
         </Text>
       </TouchableOpacity>
     </View>
@@ -67,12 +71,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 30,
     backgroundColor: 'white',
-    paddingLeft: 12,
+    paddingHorizontal: 15,
   },
   fileNameText: {
     ...fonts.body3,
     flex: 1,
-    paddingLeft: 10,
+    marginLeft: 10,
     color: Color.blueGray[900],
   },
 });

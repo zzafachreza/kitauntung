@@ -8,24 +8,31 @@ export default function MyPicker({
   label,
   iconname,
   onChangeText,
+  onValueChange,
   value = '',  // Pastikan value punya default value
   data = [],
 }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(data[0]);  // Default selected item
-  
+  const [selectedItem, setSelectedItem] = useState(
+    data.length > 0 ? data.find((item) => item.value === value) || data[0] : null
+  );
+
+  const handleSelect = (item) => {
+    setSelectedItem(item);
+    if (typeof onValueChange === 'function') {
+      onValueChange(item.value); // ✅ Pastikan `onValueChange` adalah fungsi sebelum dipanggil
+    }
+    setModalVisible(false);
+  };
+
+
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.itemContainer}
-      onPress={() => {
-        setSelectedItem(item);  // Simpan item yang dipilih
-        onChangeText(item.value);  // Update value sesuai yang dipilih
-        setModalVisible(false);
-      }}
-    >
+    <TouchableOpacity style={styles.itemContainer} onPress={() => handleSelect(item)}>
       <Text style={styles.itemText}>{item.label}</Text>
     </TouchableOpacity>
   );
+
+
 
   return (
     <>

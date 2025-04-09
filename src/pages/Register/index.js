@@ -12,13 +12,15 @@ export default function Register({ navigation }) {
         nik: '',
         nama_lengkap: '',
         username: '',
+        ttl: '',
+        status: '',
+        agama: '',
         nomor_telepon: '',
         alamat: '',
         rt: '',
         rw: '',
         kelurahan_desa: '',
         kecamatan: '',
-        pendidikan: '',
         pekerjaan: '',
         kewarganegaraan: '',
         kata_sandi: '', // Hanya menyimpan kata sandi
@@ -34,11 +36,13 @@ export default function Register({ navigation }) {
             data.username.length === '' ||
             data.nomor_telepon.length === '' ||
             data.alamat.length === '' ||
+            data.tll.length === '' ||
+            data.status.length === '' ||
+            data.agama.length === '' ||
             data.rt.length === '' ||
             data.rw.length === '' ||
             data.kelurahan_desa.length === '' ||
             data.kecamatan.length === '' ||
-            data.pendidikan.length === '' ||
             data.pekerjaan.length === '' ||
             data.kewarganegaraan.length === '' ||
             data.kata_sandi.length === '' ||
@@ -100,91 +104,173 @@ export default function Register({ navigation }) {
                         <Text style={{ fontFamily: fonts.primary[600], fontSize: 24, color: colors.black, textAlign: 'center' }}>Daftar</Text>
 
                         <View style={{ padding: 10 }}>
-                            <MyInput
+                            <View>
+                                  <MyInput
                                 value={data.nik}
                                 placeholder="NIK"
                                 onChangeText={(x) => setData({ ...data, nik: x })}
                             />
 
+                            </View>
+                           
+                           <View style={{
+                            marginTop:-40
+                           }}>
+                            
+                            <View>
                             <MyInput
                                 value={data.nama_lengkap}
                                 placeholder="Nama Lengkap"
                                 onChangeText={(x) => setData({ ...data, nama_lengkap: x })}
                             />
+                            </View>
 
-                            <MyInput
+                           </View>
+                          
+                          <View style={{
+                            marginTop:-40
+                          }}>
+                          <MyInput
                                 value={data.username}
                                 placeholder="Username"
                                 onChangeText={(x) => setData({ ...data, username: x })}
                             />
+                          </View>
 
+                         <View style={{
+                            marginTop:-40
+                         }}>
+                               
+                         <MyInput
+                                value={data.ttl}
+                                placeholder="TTL"
+                                onChangeText={(x) => setData({ ...data, ttl: x })}
+                            />
+                         </View>
+
+                            <View style={{
+                                marginTop:-40
+                            }}>
+                                
+                            
+<MyInput
+                                value={data.status}
+                                placeholder="Status"
+                                onChangeText={(x) => setData({ ...data, status: x })}
+                            />
+
+                            </View>
+                            
+                            <View style={{
+                                marginTop:-40
+                            }}>
+                            <MyInput
+                                value={data.agama}
+                                placeholder="Agama"
+                                onChangeText={(x) => setData({ ...data, agama: x })}
+                            />
+
+                            </View>
+                            
+                            <View style={{
+                                marginTop:-40
+                            }}>
                             <MyInput
                                 value={data.nomor_telepon}
                                 placeholder="Nomor Telepon"
                                 onChangeText={(x) => setData({ ...data, nomor_telepon: x })}
                             />
+                            </View>
+                            
 
-                            <MyInput
+                          <View style={{
+                            marginTop:-40
+                          }}>
+                          <MyInput
                                 value={data.alamat}
                                 placeholder="Alamat"
                                 onChangeText={(x) => setData({ ...data, alamat: x })}
                             />
+                          </View>
 
-                            <MyInput
+                           <View style={{marginTop:-40}}>
+                             <MyInput
                                 value={data.rt}
                                 placeholder="RT"
                                 onChangeText={(x) => setData({ ...data, rt: x })}
                             />
 
-                            <MyInput
+                           </View>
+                           
+                           <View style={{marginTop:-40}}>
+                           <MyInput
                                 value={data.rw}
                                 placeholder="RW"
                                 onChangeText={(x) => setData({ ...data, rw: x })}
                             />
+                           </View>
 
+                            <View style={{
+                                marginTop:-40
+                            }}>
                             <MyInput
                                 value={data.kelurahan_desa}
                                 placeholder="Kelurahan/Desa"
                                 onChangeText={(x) => setData({ ...data, kelurahan_desa: x })}
                             />
 
+                            </View>
+
+                            <View style={{marginTop:-40}}>
                             <MyInput
                                 value={data.kecamatan}
                                 placeholder="Kecamatan"
                                 onChangeText={(x) => setData({ ...data, kecamatan: x })}
                             />
+                            </View>
 
-                            <MyInput
+                            {/* <MyInput
                                 value={data.pendidikan}
                                 placeholder="Pendidikan"
                                 onChangeText={(x) => setData({ ...data, pendidikan: x })}
-                            />
+                            /> */}
 
-                            <MyInput
+                           <View style={{marginTop:-40}}>
+                           <MyInput
                                 value={data.pekerjaan}
                                 placeholder="Pekerjaan"
                                 onChangeText={(x) => setData({ ...data, pekerjaan: x })}
                             />
+                           </View>
 
-                            <MyInput
+                           <View style={{marginTop:-40}}>
+                           <MyInput
                                 value={data.kewarganegaraan}
                                 placeholder="Kewarganegaraan"
                                 onChangeText={(x) => setData({ ...data, kewarganegaraan: x })}
                             />
 
-                            <MyInput
+                           </View>
+
+                          <View style={{
+                            marginTop:-40
+                          }}>
+                          <MyInput
                                 value={data.kata_sandi}
                                 placeholder="Kata Sandi"
                                 secureTextEntry={true}
                                 onChangeText={(x) => setData({ ...data, kata_sandi: x })}
                             />
+                          </View>
 
+                            <View style={{marginTop:-40}}>
                             <MyInput
                                 value={konfirmasiKataSandi}
                                 placeholder="Konfirmasi Kata Sandi"
                                 secureTextEntry={true}
                                 onChangeText={(x) => setKonfirmasiKataSandi(x)} // Update state konfirmasi kata sandi
                             />
+                            </View>
 
 <View style={{marginTop:50}}>
                                    <TouchableNativeFeedback onPress={handleRegister}>

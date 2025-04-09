@@ -234,8 +234,10 @@ export default function Home({ navigation, route }) {
                 alignItems:"center",
               }}>
 
+              <View/>
 
-              <TouchableNativeFeedback onPress={() => navigation.navigate('PermohonanSuratKeterangan')}>
+
+              <TouchableNativeFeedback  onPress={() => navigation.navigate('PermohonanSuratKeterangan')}>
                 <View style={{
                   padding:10,
                   borderRadius:20,
@@ -245,7 +247,8 @@ export default function Home({ navigation, route }) {
                   height:148,
                   alignItems:"center",
                   justifyContent:"center",
-                  backgroundColor:colors.white
+                  backgroundColor:colors.white,
+                  
                 }}>
                 
                 <Image style={{

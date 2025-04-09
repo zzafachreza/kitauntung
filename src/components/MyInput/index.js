@@ -38,7 +38,7 @@ export default function MyInput({
       <Text style={{
         fontFamily:fonts.primary[600],
         color: colorlabel,
-        marginBottom: 8,
+        marginBottom: 20,
         marginLeft:10,
         marginTop:20
       }}>{label}</Text>

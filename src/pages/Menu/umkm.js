@@ -12,6 +12,7 @@ export default function LapakUMKM({ navigation }) {
       nama: 'Toko Kue Ende',
       lokasi: 'Lempuing, Ratu Agung, Bengkulu City, Bengkulu',
       gambar: require('../../assets/dummy-img2.png'),
+      no_tlp:"0897767698968"
     },
   
     // Tambahkan data lain sesuai kebutuhan
@@ -76,6 +77,26 @@ export default function LapakUMKM({ navigation }) {
                         {item.lokasi}
                       </Text>
                     </View>
+
+                    <View style={{
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      alignItems: 'center',
+                    }}>
+                      <Image style={{
+                        width: 11,
+                        height: 15,
+                      }} source={require('../../assets/iconhp.png')} />
+                      <Text style={{
+                        width: 200,
+                        fontFamily: fonts.primary[400],
+                        fontSize: 12,
+                        paddingHorizontal: 10
+                      }}>
+                        {item.no_tlp}
+                      </Text>
+                    </View>
+
                   </View>
                 </View>
 

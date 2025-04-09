@@ -25,7 +25,7 @@ import GaleriDetail from './Menu/galeridetail';
 import PermohonanSuratKeterangan from './Menu/SuratKeterangan';
 import TambahPermohonan from './Menu/TambahPermohonan';
 import SKTMPage from './Menu/sktm';
-
+import OutputSKTM from './Menu/ouputsktm';
 
 
 
@@ -58,6 +58,7 @@ export {
   PermohonanSuratKeterangan,
   TambahPermohonan,
   SKTMPage,
+OutputSKTM,
   
 
   

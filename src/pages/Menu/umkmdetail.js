@@ -95,9 +95,19 @@ export default function UMKMDetail({ navigation }) {
                   fontFamily: fonts.primary[600],
                   fontSize: 12,
                   marginTop: 10,
-                  textAlign: "center"
+                  textAlign: "left"
                 }}>
                   {item.nama}
+                </Text>
+
+                <Text style={{
+                  fontFamily: fonts.primary[600],
+                  fontSize: 12,
+                  marginTop: 10,
+                  textAlign: "left",
+                  color:"#2DAE00"
+                }}>
+                  {item.harga}
                 </Text>
 
                 <View style={{

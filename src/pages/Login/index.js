@@ -119,13 +119,17 @@ export default function Login({navigation}) {
                 onChangeText={(x) => setData({...data, 'email':x})}
                 />
 
-                <MyInput 
+              <View style={{
+                marginTop:-40
+              }}>
+              <MyInput 
                
-                placeholder="Kata Sandi"  
-                secureTextEntry={true}
-                value={data.password}
-                onChangeText={(x) => setData({...data, 'password':x})}
-                />
+               placeholder="Kata Sandi"  
+               secureTextEntry={true}
+               value={data.password}
+               onChangeText={(x) => setData({...data, 'password':x})}
+               />
+              </View>
 
                 <View style={{
                     flexDirection:'row',
