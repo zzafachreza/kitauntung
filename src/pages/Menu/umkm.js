@@ -1,22 +1,35 @@
-import { View, Text, ScrollView, TouchableNativeFeedback, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import React from 'react';
 import { colors, fonts } from '../../utils';
 import { MyHeader } from '../../components';
-import { Icon } from 'react-native-elements';
-
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
+import moment from 'moment';
+import { apiURL, webURL } from '../../utils/localStorage';
+import { FlatList } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { ImageBackground } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { Image } from 'react-native';
 export default function LapakUMKM({ navigation }) {
   // Data dummy untuk lapak UMKM
-  const lapakUMKM = [
-    {
-      id: 1,
-      nama: 'Toko Kue Ende',
-      lokasi: 'Lempuing, Ratu Agung, Bengkulu City, Bengkulu',
-      gambar: require('../../assets/dummy-img2.png'),
-      no_tlp:"0897767698968"
-    },
-  
-    // Tambahkan data lain sesuai kebutuhan
-  ];
+  const [data, setData] = useState([]);
+  const isFocused = useIsFocused();
+  const __getTransaksi = () => {
+    axios.post(apiURL + 'toko').then(res => {
+      console.log(res.data);
+      setData(res.data);
+    })
+  }
+  useEffect(() => {
+    if (isFocused) {
+      __getTransaksi();
+    }
+  }, [isFocused])
+
 
   return (
     <View style={{
@@ -30,8 +43,8 @@ export default function LapakUMKM({ navigation }) {
           padding: 10,
         }}>
           {/* Perulangan menggunakan map */}
-          {lapakUMKM.map((item) => (
-            <TouchableNativeFeedback key={item.id}>
+          {data.map((item) => (
+            <TouchableWithoutFeedback key={item.id}>
               <View style={{
                 padding: 10,
                 borderWidth: 1,
@@ -48,7 +61,9 @@ export default function LapakUMKM({ navigation }) {
                     <Image style={{
                       width: 106,
                       height: 106,
-                    }} source={item.gambar} />
+                    }} source={{
+                      uri: webURL + item.gambar_toko
+                    }} />
                   </View>
 
                   <View style={{ marginLeft: 10 }}>
@@ -56,7 +71,7 @@ export default function LapakUMKM({ navigation }) {
                       fontFamily: fonts.primary[600],
                       fontSize: 18,
                     }}>
-                      {item.nama}
+                      {item.nama_toko}
                     </Text>
 
                     <View style={{
@@ -74,7 +89,7 @@ export default function LapakUMKM({ navigation }) {
                         fontSize: 12,
                         paddingHorizontal: 10
                       }}>
-                        {item.lokasi}
+                        {item.alamat_toko}
                       </Text>
                     </View>
 
@@ -93,7 +108,7 @@ export default function LapakUMKM({ navigation }) {
                         fontSize: 12,
                         paddingHorizontal: 10
                       }}>
-                        {item.no_tlp}
+                        {item.telepon_toko}
                       </Text>
                     </View>
 
@@ -105,18 +120,21 @@ export default function LapakUMKM({ navigation }) {
                   justifyContent: "flex-end",
                   alignItems: "center"
                 }}>
-                  <TouchableNativeFeedback onPress={() => navigation.navigate('UMKMDetial', { id: item.id })}>
+                  <TouchableOpacity onPress={() => navigation.navigate('UMKMDetial', item)}>
                     <View style={{
                       padding: 10,
+                      width: 120,
+                      justifyContent: 'center',
+                      alignItems: 'center',
                       backgroundColor: colors.primary,
                       borderRadius: 5
                     }}>
-                      <Text style={{ fontFamily: fonts.primary[500], color: colors.white, fontSize: 12 }}>Detail</Text>
+                      <Text style={{ fontFamily: fonts.primary[500], color: colors.white, fontSize: 14 }}>Detail</Text>
                     </View>
-                  </TouchableNativeFeedback>
+                  </TouchableOpacity>
                 </View>
               </View>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
           ))}
         </View>
       </ScrollView>

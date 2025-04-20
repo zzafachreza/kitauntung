@@ -1,84 +1,99 @@
-import { View, Text, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import React from 'react';
 import { colors } from '../../utils';
 import { MyHeader } from '../../components';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
-const galleryData = [
-  {
-    id: 1,
-    title: 'Kegiatan Musrembang 2025',
-    image: require('../../assets/img_dummy2.png'),
-    previewImages: [
-      require('../../assets/img_dummy2.png'),
-      require('../../assets/img_dummy2.png'),
-      require('../../assets/img_dummy2.png')
-    ]
-  },
-  // Add more gallery items as needed
-];
-
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
+import moment from 'moment';
+import { apiURL, webURL } from '../../utils/localStorage';
+import { FlatList } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { ImageBackground } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 export default function Galeri({ navigation }) {
+
+
+
+  const [data, setData] = useState([]);
+  const isFocused = useIsFocused();
+  const __getTransaksi = () => {
+    axios.post(apiURL + 'galeri').then(res => {
+      console.log(res.data);
+      setData(res.data);
+    })
+  }
+  useEffect(() => {
+    if (isFocused) {
+      __getTransaksi();
+    }
+  }, [isFocused])
+
+
   return (
-    <View style={{ flex: 1, backgroundColor: colors.white }}>
+    <View style={{
+      flex: 1,
+      backgroundColor: colors.white
+    }}>
       <MyHeader title="Galeri" />
-      <ScrollView>
-        <View style={{ padding: 10 }}>
-          {galleryData.map((item) => (
-            <TouchableWithoutFeedback 
-              key={item.id}
-              onPress={() => navigation.navigate('GaleriDetail', {
-                title: item.title,
-                mainImage: item.image,
-                previewImages: item.previewImages
-              })}
-            >
-              <ImageBackground
-                source={item.image}
-                style={{
-                  borderRadius: 10,
-                  overflow: 'hidden',
-                  marginBottom: 10,
-                  width: "100%",
-                  height: 203,
-                }}
-                imageStyle={{ borderRadius: 10 }}
-              >
-                <View style={{
-                  padding: 15,
-                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                  flex: 1,
-                  justifyContent: 'flex-end',
-                }}>
-                  <Text style={{
-                    fontSize: 16,
-                    fontFamily: 'Poppins-Bold',
-                    color: colors.white,
-                    marginBottom: 5,
-                    lineHeight: 22,
-                  }}>
-                    {item.title}
-                  </Text>
-                  <TouchableOpacity onPress={() => navigation.navigate('GaleriDetail', {
-                    title: item.title,
-                    mainImage: item.image,
-                    previewImages: item.previewImages
-                  })}>
+      <View style={{
+        flex: 1,
+        padding: 10,
+      }}>
+        <FlatList data={data} renderItem={({ item, index }) => {
+          return (
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('GaleriDetail', item)}>
+              <View style={{
+                width: '100%',
+                maxWidth: 600,
+                borderRadius: 16,
+                overflow: 'hidden',
+                alignSelf: 'center',
+                marginVertical: 10,
+                elevation: 4,
+                backgroundColor: '#000'
+              }}>
+                <ImageBackground
+                  source={{ uri: webURL + item.cover }}
+                  style={{ width: '100%', height: 200, justifyContent: 'flex-end' }}
+                  imageStyle={{ borderRadius: 16 }}
+                >
+                  <LinearGradient
+                    colors={['rgba(0,0,0,0.7)', 'transparent']}
+                    start={{ x: 0, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      padding: 16,
+                      justifyContent: 'flex-end',
+                      height: '100%',
+                    }}
+                  >
                     <Text style={{
-                      fontSize: 12,
-                      fontFamily: 'Poppins-SemiBold',
-                      color: colors.white,
-                      textAlign: 'right',
+                      color: 'white',
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginBottom: 4,
                     }}>
-                      Selengkapnya
+                      {item.judul}
                     </Text>
-                  </TouchableOpacity>
-                </View>
-              </ImageBackground>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Text style={{ color: 'white', fontSize: 12 }}>{moment(item.tanggal).format('DD MMMM YYYY')}</Text>
+
+                      <Text style={{ color: 'white', fontSize: 12 }}>Selengkapnya ➔</Text>
+
+                    </View>
+                  </LinearGradient>
+                </ImageBackground>
+              </View>
             </TouchableWithoutFeedback>
-          ))}
-        </View>
-      </ScrollView>
+          )
+        }}
+
+        />
+
+      </View>
     </View>
   );
 }

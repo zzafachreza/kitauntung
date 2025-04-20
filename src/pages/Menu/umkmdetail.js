@@ -1,55 +1,40 @@
 import { View, Text, ScrollView, Image, TouchableNativeFeedback } from 'react-native';
-import React from 'react';
-import { colors, fonts } from '../../utils';
+import React, { useEffect } from 'react';
+import { Color, colors, fonts, windowWidth } from '../../utils';
 import { MyHeader } from '../../components';
 import { Icon } from 'react-native-elements';
-
-export default function UMKMDetail({ navigation }) {
+import { useState } from 'react';
+import { apiURL, webURL } from '../../utils/localStorage';
+import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
+import moment from 'moment';
+import 'intl';
+import 'intl/locale-data/jsonp/id'; // <-- untuk Indonesia
+export default function UMKMDetail({ navigation, route }) {
+  const toko = route.params;
   // Data dummy untuk produk UMKM
-  const produkUMKM = [
-    {
-      id: 1,
-      nama: 'Permen Warna Warni',
-      gambar: require('../../assets/permen_1.png'),
-      harga: 'Rp25.000',
-    },
-    {
-      id: 2,
-      nama: 'Kue Lebaran',
-      gambar: require('../../assets/kuelebaran.png'),
-      harga: 'Rp30.000',
-    },
-    {
-      id: 3,
-      nama: 'Serundeng Pisang',
-      gambar: require('../../assets/serundeng.png'),
-      harga: 'Rp15.000',
-    },
-    {
-      id: 4,
-      nama: 'Sari Aren',
-      gambar: require('../../assets/sarieren.png'),
-      harga: 'Rp20.000',
-    },
-    {
-      id: 5,
-      nama: 'Squash Jeruk',
-      gambar: require('../../assets/squash.png'),
-      harga: 'Rp25.000',
-    },
-    {
-      id: 6,
-      nama: 'Sari Buah',
-      gambar: require('../../assets/saribuah.png'),
-      harga: 'Rp10.000',
-    },
-    // Tambahkan data lain sesuai kebutuhan
-  ];
+  const [data, setData] = useState([]);
 
+  const isFocused = useIsFocused();
+  const __getTransaksi = () => {
+    axios.post(apiURL + 'umkm', {
+      fid_toko: toko.id_toko
+    }).then(res => {
+      console.log(res.data);
+      setData(res.data);
+    })
+  }
+  useEffect(() => {
+    if (isFocused) {
+      __getTransaksi();
+    }
+  }, [isFocused])
   // Fungsi untuk menangani klik tombol keranjang
   const handleCartPress = (item) => {
     navigation.navigate('UMKMCheckout', {
-      nama: item.nama,
+      nama_toko: toko.nama_toko,
+      telepon_toko: toko.telepon_toko,
+      nama: item.produk,
       gambar: item.gambar,
       harga: item.harga,
     });
@@ -60,10 +45,47 @@ export default function UMKMDetail({ navigation }) {
       flex: 1,
       backgroundColor: colors.white
     }}>
-      <MyHeader title="Toko Kue Ende" />
+      <MyHeader title={toko.nama_toko} />
+      <View style={{
+        padding: 10,
+        margin: 10,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: Color.blueGray[300],
+        flexDirection: 'row',
+        alignItems: 'center'
+      }}>
+        <Image style={{
+          width: 80,
+          height: 80,
+        }} source={{
+          uri: webURL + toko.gambar_toko
+        }} />
+        <View style={{
+          flex: 1,
+          padding: 10,
+        }}>
+          <Text style={{
+            fontFamily: fonts.secondary[800],
+            color: colors.black,
+            fontSize: 15
+          }}>{toko.nama_toko}</Text>
+          <Text style={{
+            fontFamily: fonts.secondary[600],
+            color: colors.black,
+            fontSize: 12
+          }}>{toko.alamat_toko}</Text>
+          <Text style={{
+            fontFamily: fonts.secondary[400],
+            color: colors.black,
+            fontSize: 13
+          }}>{toko.telepon_toko}</Text>
+        </View>
+      </View>
 
       <ScrollView>
         <View style={{
+          marginTop: 10,
           padding: 10,
         }}>
 
@@ -74,22 +96,25 @@ export default function UMKMDetail({ navigation }) {
           }}>
 
             {/* Perulangan menggunakan map */}
-            {produkUMKM.map((item) => (
-              <View key={item.id} style={{
+            {data.map((item) => (
+              <View key={item.id_umkm} style={{
                 padding: 10,
                 borderWidth: 2,
+                overflow: 'hidden',
                 borderRadius: 10,
                 borderColor: colors.primary,
-                width: 167,
+                width: windowWidth / 2.2,
                 marginBottom: 10, // Jarak antar item
               }}>
 
                 <Image style={{
-                  width: 163,
+                  width: windowWidth / 2.2,
                   height: 182,
                   alignSelf: "center",
                   marginTop: -10
-                }} source={item.gambar} />
+                }} source={{
+                  uri: webURL + item.gambar
+                }} />
 
                 <Text style={{
                   fontFamily: fonts.primary[600],
@@ -97,7 +122,7 @@ export default function UMKMDetail({ navigation }) {
                   marginTop: 10,
                   textAlign: "left"
                 }}>
-                  {item.nama}
+                  {item.produk}
                 </Text>
 
                 <Text style={{
@@ -105,9 +130,9 @@ export default function UMKMDetail({ navigation }) {
                   fontSize: 12,
                   marginTop: 10,
                   textAlign: "left",
-                  color:"#2DAE00"
+                  color: "#2DAE00"
                 }}>
-                  {item.harga}
+                  {new Intl.NumberFormat().format(item.harga)}
                 </Text>
 
                 <View style={{
@@ -118,7 +143,7 @@ export default function UMKMDetail({ navigation }) {
 
                   <TouchableNativeFeedback onPress={() => handleCartPress(item)}>
                     <View style={{ marginTop: 10 }}>
-                      <Icon type='ionicon' name='cart-outline' size={20} color={colors.primary} />
+                      <Icon type='ionicon' name='cart-outline' size={30} color={colors.primary} />
                     </View>
                   </TouchableNativeFeedback>
 

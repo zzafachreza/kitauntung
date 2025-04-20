@@ -1,7 +1,14 @@
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import React from 'react';
-import { colors } from '../../utils';
+import { colors, windowWidth } from '../../utils';
 import { MyHeader } from '../../components';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
+import moment from 'moment';
+import { apiURL } from '../../utils/localStorage';
+import { FlatList } from 'react-native';
 
 export default function Penduduk({ navigation }) {
   // Data penduduk
@@ -19,24 +26,106 @@ export default function Penduduk({ navigation }) {
     "Pekerjaan": "Karyawan Swasta",
     "Kewarganegaraan": "Indonesia"
   };
-
+  const [data, setData] = useState([]);
+  const isFocused = useIsFocused();
+  const __getTransaksi = () => {
+    axios.post(apiURL + 'penduduk').then(res => {
+      console.log(res.data);
+      setData(res.data);
+    })
+  }
+  useEffect(() => {
+    if (isFocused) {
+      __getTransaksi();
+    }
+  }, [isFocused])
   return (
     <View style={styles.container}>
       <MyHeader title="Penduduk" />
-      <ScrollView>
-        <View style={styles.content}>
-          {/* Card Container */}
-          <View style={styles.card}>
-            {Object.entries(dataPenduduk).map(([label, value]) => (
-              <View style={styles.row} key={label}>
-                <Text style={styles.label}>{label}</Text>
+      <FlatList data={data} renderItem={({ item, index }) => {
+        return (
+
+          <View style={styles.content}>
+            {/* Card Container */}
+            <View style={styles.card}>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Nama Lengkap</Text>
                 <Text style={styles.colon}>:</Text>
-                <Text style={styles.value}>{value}</Text>
+                <Text style={styles.value}>{item.nama_lengkap}</Text>
               </View>
-            ))}
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>NIK</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.nik}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Jenis Kelamin</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.jenis_kelamin}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>TTL</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.ttl}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Alamat</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.alamat}</Text>
+              </View>
+
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>RT</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.nama_rt}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>RW</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.nama_rw}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Kelurahan / Desa</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.kelurahan_desa}</Text>
+              </View>
+
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Kecamatan</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.kecamatan}</Text>
+              </View>
+
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Agama</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.agama}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Status</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.status}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Pekerjaan</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.pekerjaan}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Kewarganegaraan</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.kewarganegaraan}</Text>
+              </View>
+              <View style={styles.row} key={index}>
+                <Text style={styles.label}>Nama</Text>
+                <Text style={styles.colon}>:</Text>
+                <Text style={styles.value}>{item.nama_lengkap}</Text>
+              </View>
+
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        )
+      }} />
     </View>
   );
 }
@@ -65,7 +154,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     fontSize: 12,
     color: '#000',
-    width: 120, // Fixed width for consistent alignment
+    width: windowWidth / 3, // Fixed width for consistent alignment
     lineHeight: 18
   },
   colon: {

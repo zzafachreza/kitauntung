@@ -1,81 +1,99 @@
-import { View, Text, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import React from 'react';
 import { colors } from '../../utils';
 import { MyHeader } from '../../components';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
+import moment from 'moment';
+import { apiURL, webURL } from '../../utils/localStorage';
+import { FlatList } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { ImageBackground } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 export default function Pembangunan({ navigation }) {
+
+
+
+  const [data, setData] = useState([]);
+  const isFocused = useIsFocused();
+  const __getTransaksi = () => {
+    axios.post(apiURL + 'pembangunan').then(res => {
+      console.log(res.data);
+      setData(res.data);
+    })
+  }
+  useEffect(() => {
+    if (isFocused) {
+      __getTransaksi();
+    }
+  }, [isFocused])
+
+
   return (
     <View style={{
       flex: 1,
       backgroundColor: colors.white
     }}>
       <MyHeader title="Pembangunan" />
-      <ScrollView>
-        <View style={{
-          padding: 10
-        }}>
-
-          <TouchableWithoutFeedback>
-            <ImageBackground
-              source={require('../../assets/img_dummy.png')} // Ganti dengan path gambar latar belakang Anda
-              style={{
-                borderRadius: 10,
-                overflow: 'hidden',
-                marginBottom: 10,
-                width: "100%",
-                height: 203,
-              }}
-              imageStyle={{ borderRadius: 10 }}
-            >
+      <View style={{
+        flex: 1,
+        padding: 10,
+      }}>
+        <FlatList data={data} renderItem={({ item, index }) => {
+          return (
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('PembangunanDetail', item)}>
               <View style={{
-                padding: 15,
-                backgroundColor: 'rgba(0, 0, 0, 0.5)', // Overlay semi-transparan
-                flex: 1,
-                justifyContent: 'flex-end', // Teks di bagian bawah
+                width: '100%',
+                maxWidth: 600,
+                borderRadius: 16,
+                overflow: 'hidden',
+                alignSelf: 'center',
+                marginVertical: 10,
+                elevation: 4,
+                backgroundColor: '#000'
               }}>
-                <Text style={{
-                  fontSize: 16, // Ukuran font lebih kecil
-                  fontFamily: 'Poppins-Bold',
-                  color: colors.white,
-                  marginBottom: 5, // Jarak antara judul dan tombol
-                  lineHeight: 22, // Tinggi baris untuk teks
-                }}>
-                  Safari Ramadhan di Tanjung Buntung dan Sadai, Rudi Paparkan Rencana...
-                </Text>
+                <ImageBackground
+                  source={{ uri: webURL + item.gambar }}
+                  style={{ width: '100%', height: 200, justifyContent: 'flex-end' }}
+                  imageStyle={{ borderRadius: 16 }}
+                >
+                  <LinearGradient
+                    colors={['rgba(0,0,0,0.7)', 'transparent']}
+                    start={{ x: 0, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      padding: 16,
+                      justifyContent: 'flex-end',
+                      height: '100%',
+                    }}
+                  >
+                    <Text style={{
+                      color: 'white',
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginBottom: 4,
+                    }}>
+                      {item.judul}
+                    </Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Text style={{ color: 'white', fontSize: 12 }}>{moment(item.tanggal).format('DD MMMM YYYY')}</Text>
 
-                <View style={{
-                  flexDirection:"row",
-                  justifyContent:"space-between",
-                  alignItems:"center",
-                }}>
+                      <Text style={{ color: 'white', fontSize: 12 }}>Selengkapnya ➔</Text>
 
-                {/* TANGGAL */}
-
-                <Text style={{
-                  fontSize:12,
-                  color:colors.white,
-                  fontFamily:'Poppins-Regular',
-                }}>9 April 2025</Text>
-                  
-                {/* SELENGKAPNYA */}
-                <TouchableOpacity onPress={() => navigation.navigate('PembangunanDetail')}>
-                  <Text style={{
-                    fontSize: 12, // Ukuran font lebih kecil
-                    fontFamily: 'Poppins-SemiBold',
-                    color: colors.white,
-                    textAlign: 'right',
-                  }}>
-                    Selengkapnya
-                  </Text>
-                </TouchableOpacity>
-                </View>
+                    </View>
+                  </LinearGradient>
+                </ImageBackground>
               </View>
-            </ImageBackground>
-          </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+          )
+        }}
 
-        </View>
-      </ScrollView>
+        />
+
+      </View>
     </View>
   );
 }

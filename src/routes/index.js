@@ -79,6 +79,7 @@ import {
   GaleriDetail,
   SKTMPage,
   OutputSKTM,
+  ShowWeb,
 
 
 
@@ -130,8 +131,17 @@ export default function Router() {
         }}
       />
 
+      <Stack.Screen
+        name="ShowWeb"
+        component={ShowWeb}
+        options={{
+          headerShown: false,
 
-<Stack.Screen
+        }}
+      />
+
+
+      <Stack.Screen
         name="Penduduk"
         component={Penduduk}
         options={{
@@ -140,7 +150,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="Pembangunan"
         component={Pembangunan}
         options={{
@@ -150,7 +160,7 @@ export default function Router() {
       />
 
 
-<Stack.Screen
+      <Stack.Screen
         name="PembangunanDetail"
         component={PembangunanDetail}
         options={{
@@ -159,7 +169,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="LapakUMKM"
         component={LapakUMKM}
         options={{
@@ -168,8 +178,8 @@ export default function Router() {
         }}
       />
 
-      
-<Stack.Screen
+
+      <Stack.Screen
         name="UMKMDetial"
         component={UMKMDetail}
         options={{
@@ -178,7 +188,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="UMKMCheckout"
         component={UMKMCheckout}
         options={{
@@ -188,7 +198,7 @@ export default function Router() {
       />
 
 
-<Stack.Screen
+      <Stack.Screen
         name="UMKMOrder"
         component={UMKMOrder}
         options={{
@@ -198,7 +208,7 @@ export default function Router() {
       />
 
 
-<Stack.Screen
+      <Stack.Screen
         name="Galeri"
         component={Galeri}
         options={{
@@ -207,7 +217,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="GaleriDetail"
         component={GaleriDetail}
         options={{
@@ -216,7 +226,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="PermohonanSuratKeterangan"
         component={PermohonanSuratKeterangan}
         options={{
@@ -226,8 +236,8 @@ export default function Router() {
       />
 
 
-      
-<Stack.Screen
+
+      <Stack.Screen
         name="TambahPermohonanSuratKeterangan"
         component={TambahPermohonan}
         options={{
@@ -237,7 +247,7 @@ export default function Router() {
       />
 
 
-<Stack.Screen
+      <Stack.Screen
         name="SKTMPage"
         component={SKTMPage}
         options={{
@@ -246,7 +256,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="OuputSKTM"
         component={OutputSKTM}
         options={{
@@ -257,7 +267,7 @@ export default function Router() {
 
 
 
-<Stack.Screen
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{
@@ -266,7 +276,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="CheckHargaStock"
         component={CheckHargaStock}
         options={{
@@ -275,7 +285,7 @@ export default function Router() {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="Register"
         component={Register}
         options={{
@@ -295,7 +305,7 @@ export default function Router() {
       />
 
 
-<Stack.Screen
+      <Stack.Screen
         name="Petunjuk"
         component={Petunjuk}
         options={{

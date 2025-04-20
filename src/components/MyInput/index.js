@@ -9,7 +9,7 @@ export default function MyInput({
   onFocus,
   label,
   nolabel = false,
-  borderColor = Color.blueGray[300],
+  borderColor = '#ced4da',
   backgroundColor = colors.white,
   editable,
   icon = true,
@@ -17,7 +17,7 @@ export default function MyInput({
   iconname,
   onChangeText,
   value,
-  colorlabel=colors.black,
+  colorlabel = colors.black,
   borderWidth = 1,
   textColor = colors.black,
   keyboardType,
@@ -34,20 +34,20 @@ export default function MyInput({
 
   const [tutup, setTutup] = useState(true);
   return (
-    <View style={{marginTop:0}}>
+    <View style={{ marginTop: 0 }}>
       <Text style={{
-        fontFamily:fonts.primary[600],
+        fontFamily: fonts.primary[600],
         color: colorlabel,
         marginBottom: 20,
-        marginLeft:10,
-        marginTop:20
+        marginLeft: 10,
+        marginTop: 20
       }}>{label}</Text>
       <View style={{
-        height: 50,
+        height: 45,
         flexDirection: 'row', // Gunakan row agar TextInput dan label bisa sejajar
         alignItems: 'center', // Align center agar teks sejajar vertikal
         borderWidth: 1,
-        borderRadius: 30,
+        borderRadius: 5,
         borderColor: borderColor,
         backgroundColor: 'white',
       }}>
@@ -76,7 +76,7 @@ export default function MyInput({
             flex: 1, // Flex untuk mengisi ruang yang ada
             paddingLeft: icon ? 10 : 40,
             paddingRight: rightLabel ? 10 : 0, // Spasi tambahan jika ada rightLabel
-            height: 40,
+            height: 45,
             color: Color.blueGray[900],
           }}
         />

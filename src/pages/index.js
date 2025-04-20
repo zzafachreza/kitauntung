@@ -26,6 +26,7 @@ import PermohonanSuratKeterangan from './Menu/SuratKeterangan';
 import TambahPermohonan from './Menu/TambahPermohonan';
 import SKTMPage from './Menu/sktm';
 import OutputSKTM from './Menu/ouputsktm';
+import ShowWeb from './Menu/ShowWeb';
 
 
 
@@ -34,6 +35,7 @@ export {
   Splash,
   Home,
   Login,
+  ShowWeb,
   Account,
   AccountEdit,
   KalkulatorKompos,
@@ -58,9 +60,9 @@ export {
   PermohonanSuratKeterangan,
   TambahPermohonan,
   SKTMPage,
-OutputSKTM,
-  
+  OutputSKTM,
 
-  
+
+
 
 };
