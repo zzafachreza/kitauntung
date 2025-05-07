@@ -77,7 +77,11 @@ export default function PermohonanSuratKeterangan({ navigation }) {
               <View style={styles.footer}>
                 <Text style={styles.date}>{moment(item.tanggal).format('DD MMMM YYYY')}</Text>
                 <View style={styles.statusBadge}>
-                  <Text style={styles.statusText}>{item.status_surat}</Text>
+                  <Text style={{
+                    fontFamily: 'Poppins-Medium',
+                    fontSize: 12,
+                    color: item.status_surat == 'Disetujui' ? colors.success : '#856404'
+                  }}>{item.status_surat}</Text>
                 </View>
               </View>
 
@@ -86,11 +90,21 @@ export default function PermohonanSuratKeterangan({ navigation }) {
                 flexDirection: 'row',
                 justifyContent: 'flex-end'
               }}>
-                <TouchableOpacity onPress={() => navigation.navigate('ShowWeb', {
-                  judul: 'Permohonan Surat Keterangan',
-                  link: webURL + 'surat/print/' + item.id_surat,
-                  cetak: 1,
-                })} style={{
+                <TouchableOpacity onPress={() => {
+                  if (item.status_surat == 'Disetujui') {
+                    navigation.navigate('ShowWeb', {
+                      judul: 'Permohonan Surat Keterangan',
+                      link: webURL + 'surat/print/' + item.id_surat,
+                      cetak: 1,
+                    })
+                  } else {
+                    navigation.navigate('ShowWeb', {
+                      judul: 'Permohonan Surat Keterangan',
+                      link: webURL + 'surat/detail/' + item.id_surat,
+                      cetak: 0,
+                    })
+                  }
+                }} style={{
                   padding: 10,
                   flex: 1,
                   backgroundColor: colors.white,
@@ -100,55 +114,62 @@ export default function PermohonanSuratKeterangan({ navigation }) {
                     textAlign: 'center',
                   }}>Detail</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('ShowWeb', {
-                  judul: 'Permohonan Surat Keterangan',
-                  link: webURL + 'surat/edit2/' + item.id_surat
-                })} style={{
-                  padding: 10,
-                  flex: 1,
-                  backgroundColor: colors.primary,
-                }}>
-                  <Text style={{
-                    fontFamily: fonts.secondary[600],
-                    textAlign: 'center',
-                  }}>Edit</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => Alert.alert(MYAPP, 'Apakah kamu mau hapus ini ?', [
-                  {
-                    text: 'Tidak'
-                  }, {
-                    text: 'Ya, Hapus',
-                    onPress: () => {
-                      axios.post(apiURL + 'delete_data', {
-                        modul: 'surat',
-                        id: item.id_surat
-                      }).then(res => {
-                        if (res.data.status == 200) {
-                          __getTransaksi();
-                          showMessage({
-                            type: 'success',
-                            message: 'Data berhasil dihapus !'
-                          })
-                        }
-                      })
+                {item.status_surat !== 'Disetujui' &&
+
+                  <TouchableOpacity onPress={() => navigation.navigate('ShowWeb', {
+                    judul: 'Permohonan Surat Keterangan',
+                    link: webURL + 'surat/edit2/' + item.id_surat
+                  })} style={{
+                    padding: 10,
+                    flex: 1,
+                    backgroundColor: colors.primary,
+                  }}>
+                    <Text style={{
+                      fontFamily: fonts.secondary[600],
+                      textAlign: 'center',
+                    }}>Edit</Text>
+                  </TouchableOpacity>
+                }
+                {item.status_surat !== 'Disetujui' &&
+                  <TouchableOpacity onPress={() => Alert.alert(MYAPP, 'Apakah kamu mau hapus ini ?', [
+                    {
+                      text: 'Tidak'
+                    }, {
+                      text: 'Ya, Hapus',
+                      onPress: () => {
+                        axios.post(apiURL + 'delete_data', {
+                          modul: 'surat',
+                          id: item.id_surat
+                        }).then(res => {
+                          if (res.data.status == 200) {
+                            __getTransaksi();
+                            showMessage({
+                              type: 'success',
+                              message: 'Data berhasil dihapus !'
+                            })
+                          }
+                        })
+                      }
                     }
-                  }
-                ])} style={{
-                  padding: 10,
-                  flex: 1,
-                  backgroundColor: colors.danger,
-                }}>
-                  <Text style={{
-                    fontFamily: fonts.secondary[600],
-                    textAlign: 'center',
-                    color: 'white'
-                  }}>Hapus</Text>
-                </TouchableOpacity>
+                  ])} style={{
+                    padding: 10,
+                    flex: 1,
+                    backgroundColor: colors.danger,
+                  }}>
+                    <Text style={{
+                      fontFamily: fonts.secondary[600],
+                      textAlign: 'center',
+                      color: 'white'
+                    }}>Hapus</Text>
+                  </TouchableOpacity>
+                }
               </View>
             </View>
 
+
           )
         }} />
+
       </View>
 
       <View style={{

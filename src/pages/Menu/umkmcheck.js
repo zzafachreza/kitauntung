@@ -7,7 +7,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { webURL } from '../../utils/localStorage';
 
 export default function UMKMCheckout({ route, navigation }) {
-  const { nama, gambar, harga, nama_toko, telepon_toko, alamat_toko } = route.params;
+  const { nama, gambar, harga, nama_toko, telepon_toko, alamat_toko, keterangan } = route.params;
 
   // Extract numeric value from harga string (assuming format like "Rp25.000")
   const numericHarga = parseInt(harga.replace(/\D/g, ''), 10);
@@ -99,6 +99,9 @@ export default function UMKMCheckout({ route, navigation }) {
 
           <View>
             <Text style={styles.harga}>{new Intl.NumberFormat().format(harga)}</Text>
+          </View>
+          <View>
+            <Text>{keterangan}</Text>
           </View>
         </View>
       </ScrollView>

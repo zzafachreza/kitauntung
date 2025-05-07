@@ -116,11 +116,7 @@ export default function Penduduk({ navigation }) {
                 <Text style={styles.colon}>:</Text>
                 <Text style={styles.value}>{item.kewarganegaraan}</Text>
               </View>
-              <View style={styles.row} key={index}>
-                <Text style={styles.label}>Nama</Text>
-                <Text style={styles.colon}>:</Text>
-                <Text style={styles.value}>{item.nama_lengkap}</Text>
-              </View>
+
 
             </View>
           </View>

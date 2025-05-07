@@ -34,6 +34,7 @@ export default function UMKMDetail({ navigation, route }) {
     navigation.navigate('UMKMCheckout', {
       nama_toko: toko.nama_toko,
       telepon_toko: toko.telepon_toko,
+      keterangan: item.keterangan,
       nama: item.produk,
       gambar: item.gambar,
       harga: item.harga,

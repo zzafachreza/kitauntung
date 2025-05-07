@@ -1,6 +1,6 @@
 import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
-import { colors, fonts, windowWidth } from '../../utils'
+import { Color, colors, fonts, windowWidth } from '../../utils'
 import { MyHeader } from '../../components'
 import { Image } from 'react-native'
 import { webURL } from '../../utils/localStorage'
@@ -31,6 +31,13 @@ export default function PembangunanDetail({ navigation, route }) {
                     }}>
                         {item.judul}
                     </Text>
+                    <Text style={{
+                        marginTop: 10,
+                        fontFamily: fonts.secondary[400],
+                        color: Color.blueGray[400],
+                        textAlign: 'center',
+                        fontSize: 12,
+                    }}>{moment(item.tanggal).format('DD MMMM YYYY')}</Text>
 
                     {/* Image */}
                     <Image style={{
@@ -45,11 +52,7 @@ export default function PembangunanDetail({ navigation, route }) {
                     }} />
 
                     {/* deks */}
-                    <Text style={{
-                        marginTop: 10,
-                        fontFamily: fonts.secondary[400],
-                        fontSize: 12,
-                    }}>{moment(item.tanggal).format('DD MMMM YYYY')}</Text>
+
                     <View>
                         <RenderHTML
 
